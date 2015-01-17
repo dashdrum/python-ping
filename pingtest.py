@@ -30,14 +30,14 @@ conn, cursor = open_db()
 while True:
 	try:
 		try:
-			rtt = h.ping()
+			rtt = h.ping(requery_dns=True)
 			print rtt, datetime.now()
 			cursor.execute('''INSERT INTO ping (round_trip_time, ping_time) VALUES(?,?)''', ( rtt, datetime.now(), ) )
 		except TimeoutError:
 			print 'Timeout', datetime.now()
 			cursor.execute('INSERT INTO ping (round_trip_time, ping_time) VALUES(?,?)', ( -1, datetime.now(),))
 		conn.commit();
-		sleep(60)
+		sleep(20)
 	except:
 		print "Unexpected error:", sys.exc_info()[0]
 		break
