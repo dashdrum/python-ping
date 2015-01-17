@@ -44,7 +44,7 @@ while True:
 
 h.close()
 
-cursor.execute('''SELECT * FROM ping''')
+cursor.execute('''SELECT * FROM ping where round_trip_time < 0 order by ping_time''')
 for row in cursor:
     print(row)
 
